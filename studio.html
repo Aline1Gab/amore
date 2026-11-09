@@ -42,11 +42,14 @@
       </div>
       <div class="field"><label for="dedication">DEDICATÓRIA</label><textarea id="dedication" maxlength="240" placeholder="Escreva algumas palavras para quem vai receber..."></textarea><small>Até 240 caracteres.</small></div>
       <div class="field"><label for="photos">ADICIONE FOTOS</label><div class="upload"><input id="photos" type="file" accept="image/*" multiple><p>Escolha imagens do seu computador. Elas aparecem nesta prévia, mas ainda não são salvas online.</p></div></div>
+      <div class="field"><label>PRIVACIDADE DO ÁLBUM</label><div class="themes" style="grid-template-columns:repeat(2,1fr)"><button class="theme" type="button" data-visibility="private" aria-pressed="true"><strong>🔒 Privado</strong><span>Só você acessa com sua chave de edição</span></button><button class="theme" type="button" data-visibility="public" aria-pressed="false"><strong>💌 Compartilhável</strong><span>Qualquer pessoa com o link pode visualizar</span></button></div></div>
+      <div class="actions"><button class="btn" id="saveAlbum" type="button">Salvar álbum ♡</button><button class="btn secondary" id="copyShare" type="button" hidden>Copiar link ♡</button></div>
+      <p class="notice" id="saveStatus" role="status">Seu álbum ainda não foi salvo.</p>
       <div class="field"><label for="memoryTitle">UMA LEMBRANÇA</label><input id="memoryTitle" maxlength="45" placeholder="Ex.: Nosso primeiro encontro"></div>
       <div class="field"><label for="memoryText">CONTE UM POUQUINHO</label><textarea id="memoryText" maxlength="180" placeholder="O que torna esse momento especial?"></textarea></div>
       <div class="actions"><button class="btn" id="addMemory" type="button">Adicionar lembrança +</button><button class="btn secondary" id="clear" type="button">Limpar prévia</button></div>
       <div style="margin-top:22px"><label style="display:block;font-size:11px;font-weight:700;letter-spacing:.5px;color:#6c5555;margin-bottom:9px">LEMBRANÇAS ADICIONADAS</label><div class="memories" id="memories"><div class="empty">Suas lembranças vão aparecer aqui.</div></div></div>
-      <p class="notice">Esta é uma versão de demonstração: os dados ficam somente nesta página enquanto ela estiver aberta. Ainda não existe conta, salvamento permanente, publicação ou link compartilhável.</p>
+      <p class="notice">Os textos e lembranças são salvos no banco do Amore. As fotos continuam apenas nesta prévia e não são enviadas nem armazenadas online nesta versão.</p>
     </section>
     <aside class="preview-wrap"><div class="preview-top"><h2>Prévia do seu álbum</h2><span class="live">● ao vivo</span></div>
       <div class="book-preview"><div class="book-page" id="bookPage"><div class="cover-kicker">uma coleção de memórias</div><div class="cover-title" id="previewTitle">Nossa história</div><div class="cover-subtitle" id="previewSubtitle">em cada detalhe, um pouco de nós</div><div class="cover-heart">♡</div><div class="preview-date" id="previewDate"></div><div class="preview-dedication" id="previewDedication"></div><div class="preview-memories" id="previewMemories"></div></div></div>
@@ -56,7 +59,7 @@
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
   <script>
     const $ = id => document.getElementById(id);
-    const state = {theme:'classic', memories:[], photos:[]};
+    const state = {theme:'classic', memories:[], photos:[], visibility:'private', albumId:null, editToken:null, shareUrl:null};
     const themeColors = {
       garden:{bg:'#fff8f2',surround:'#f0deda',border:'#d5b4ad',wine:'#75404b',gold:'#b87580',soft:'#f5e8e4'},
       classic:{bg:'#fffaf4',surround:'#ead9d3',border:'#c9ae8a',wine:'#632638',gold:'#b99a68',soft:'#f3e8df'},
@@ -116,6 +119,63 @@
       if(!confirm('Quer limpar as informações e recomeçar a prévia?'))return;
       $('title').value='Nossa história';$('subtitle').value='em cada detalhe, um pouco de nós';$('date').value='';$('dedication').value='';$('memoryTitle').value='';$('memoryText').value='';$('photos').value='';state.memories=[];state.photos=[];state.theme='classic';document.querySelectorAll('[data-theme]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.theme==='classic')));renderMemories();toast('Prévia limpa. Vamos começar de novo!');
     });
+
+    document.querySelectorAll('[data-visibility]').forEach(button=>button.addEventListener('click',()=>{
+      state.visibility=button.dataset.visibility;
+      document.querySelectorAll('[data-visibility]').forEach(b=>b.setAttribute('aria-pressed',String(b===button)));
+      $('copyShare').hidden=!(state.visibility==='public'&&state.shareUrl);
+    }));
+    const savedAlbumKey='amore.album.credentials.v1';
+    try {
+      const saved=JSON.parse(localStorage.getItem(savedAlbumKey)||'null');
+      if(saved&&saved.id&&saved.token){state.albumId=saved.id;state.editToken=saved.token;}
+    } catch {}
+    async function saveAlbum(){
+      const button=$('saveAlbum');
+      button.disabled=true;
+      $('saveStatus').textContent='Salvando seu álbum...';
+      const payload={
+        title:$('title').value.trim()||'Nossa história',
+        subtitle:$('subtitle').value.trim(),
+        album_date:$('date').value,
+        dedication:$('dedication').value,
+        theme:state.theme,
+        visibility:state.visibility,
+        memories:state.memories.map(item=>({title:item.title,text:item.text}))
+      };
+      try{
+        const editing=Boolean(state.albumId&&state.editToken);
+        const response=await fetch(editing?'/api/albums/'+encodeURIComponent(state.albumId):'/api/albums',{
+          method:editing?'PUT':'POST',
+          headers:{'Content-Type':'application/json',...(editing?{'Authorization':'Bearer '+state.editToken}:{})},
+          body:JSON.stringify(payload)
+        });
+        const result=await response.json();
+        if(!response.ok)throw new Error(result.error||'save_failed');
+        if(!editing){
+          state.albumId=result.album.id;
+          state.editToken=result.editToken;
+          localStorage.setItem(savedAlbumKey,JSON.stringify({id:state.albumId,token:state.editToken}));
+        }
+        state.shareUrl=result.shareUrl||null;
+        $('copyShare').hidden=!(state.visibility==='public'&&state.shareUrl);
+        $('saveStatus').textContent=state.visibility==='public'
+          ?'Álbum salvo! Seu link de visualização está pronto. As fotos ainda não são armazenadas online.'
+          :'Álbum salvo como privado neste navegador. Guarde este dispositivo: a chave de edição fica armazenada localmente.';
+        toast('Álbum salvo com sucesso ♡');
+      }catch(error){
+        $('saveStatus').textContent='Não foi possível salvar. Confira sua conexão e tente novamente.';
+        toast('Não conseguimos salvar agora.');
+        console.error(error);
+      }finally{button.disabled=false;}
+    }
+    $('saveAlbum').addEventListener('click',saveAlbum);
+    $('copyShare').addEventListener('click',async()=>{
+      if(!state.shareUrl)return;
+      try{await navigator.clipboard.writeText(state.shareUrl);toast('Link copiado! ♡');}
+      catch{prompt('Copie o link do seu álbum:',state.shareUrl);}
+    });
+
     updatePreview();
   </script>
 </body>

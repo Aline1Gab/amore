@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#f8f1e9"><title>Um álbum Amore ♡</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Sans:wght@400;500;600&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--wine:#632638;--deep:#351923;--cream:#f8f1e9;--paper:#fffaf5;--gold:#b99a68;--ink:#382b2b;--muted:#897777;--line:#e8d9d2}
+*{box-sizing:border-box}body{margin:0;background:var(--cream);color:var(--ink);font-family:'DM Sans',sans-serif}.topline{height:5px;background:linear-gradient(90deg,var(--wine),var(--gold),#b87580)}
+header{height:76px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 max(24px,calc((100% - 900px)/2))}.brand{font:28px 'Playfair Display',serif;color:var(--wine);text-decoration:none}.brand span{color:var(--gold)}
+main{max-width:900px;margin:35px auto;padding:0 20px}.book{max-width:680px;margin:auto;background:var(--paper);border:1px solid #e3d1c3;box-shadow:0 15px 35px #4b263025;padding:clamp(28px,7vw,65px);text-align:center;position:relative;min-height:420px}.book:before{content:'';position:absolute;inset:12px;border:1px solid #c9ae8a;pointer-events:none}.kicker{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--gold)}h1{font:italic 600 clamp(42px,8vw,66px)/1.05 'Cormorant Garamond',serif;color:var(--wine);overflow-wrap:anywhere;margin:25px 0 12px}.subtitle{font:13px 'Playfair Display',serif;color:var(--wine);letter-spacing:1px;line-height:1.7}.heart{font-size:26px;color:var(--gold);margin:25px}.date{font-size:11px;color:var(--muted)}.dedication{font:italic 16px/1.7 'Playfair Display',serif;color:#765b59;white-space:pre-wrap;margin:22px auto;max-width:520px}.memories{max-width:680px;margin:22px auto;display:grid;gap:12px}.memory{background:#f3e8df;padding:17px;text-align:left}.memory h2{font:20px 'Playfair Display',serif;color:var(--wine);margin:0 0 6px}.memory p{font-size:13px;color:var(--muted);line-height:1.7;margin:0;white-space:pre-wrap}.status{text-align:center;color:var(--muted);padding:45px 15px}footer{text-align:center;padding:25px;color:var(--muted);font-size:11px}
+</style></head><body><div class="topline"></div><header><a class="brand" href="index.html">♡ Amore<span>.</span></a><span style="font-size:11px;color:var(--muted)">uma história para guardar</span></header>
+<main><div id="status" class="status">Carregando álbum...</div><article id="content" hidden><section class="book"><div class="kicker">uma coleção de memórias</div><h1 id="title"></h1><div class="subtitle" id="subtitle"></div><div class="heart">♡</div><div class="date" id="date"></div><div class="dedication" id="dedication"></div></section><section class="memories" id="memories"></section></article></main><footer>♡ Amore · Feito para histórias que merecem ser lembradas.</footer>
+<script>
+const slug=new URLSearchParams(location.search).get('slug');
+const status=document.getElementById('status');
+(async()=>{
+ if(!slug||!/^[a-f0-9]{32}$/i.test(slug)){status.textContent='Este link não parece válido.';return;}
+ try{
+  const response=await fetch('/api/public/'+encodeURIComponent(slug));
+  const data=await response.json();
+  if(!response.ok)throw new Error('not_found');
+  const a=data.album;
+  document.title=(a.title||'Um álbum')+' | Amore';
+  document.getElementById('title').textContent=a.title||'Nossa história';
+  document.getElementById('subtitle').textContent=a.subtitle||'';
+  document.getElementById('date').textContent=a.album_date?new Date(a.album_date+'T12:00:00').toLocaleDateString('pt-BR'):'';
+  document.getElementById('dedication').textContent=a.dedication||'';
+  const root=document.getElementById('memories');
+  (a.memories||[]).forEach(item=>{
+   const card=document.createElement('article');card.className='memory';
+   const h=document.createElement('h2');h.textContent=item.title;
+   const p=document.createElement('p');p.textContent=item.text||'';
+   card.append(h,p);root.append(card);
+  });
+  status.hidden=true;document.getElementById('content').hidden=false;
+ }catch{status.textContent='Este álbum não está disponível. Talvez seja privado ou o link tenha sido desativado.';}
+})();
+</script></body></html>

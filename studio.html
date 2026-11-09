@@ -130,6 +130,33 @@
       const saved=JSON.parse(localStorage.getItem(savedAlbumKey)||'null');
       if(saved&&saved.id&&saved.token){state.albumId=saved.id;state.editToken=saved.token;}
     } catch {}
+    async function restoreAlbum(){
+      if(!state.albumId||!state.editToken)return;
+      try{
+        const response=await fetch('/api/albums/'+encodeURIComponent(state.albumId),{
+          headers:{'Authorization':'Bearer '+state.editToken}
+        });
+        if(!response.ok)throw new Error('restore_failed');
+        const result=await response.json();
+        const album=result.album;
+        $('title').value=album.title||'';
+        $('subtitle').value=album.subtitle||'';
+        $('date').value=album.album_date||'';
+        $('dedication').value=album.dedication||'';
+        state.theme=album.theme||'classic';
+        state.visibility=album.visibility||'private';
+        state.memories=(album.memories||[]).map(item=>({title:item.title,text:item.text||'',photo:''}));
+        document.querySelectorAll('[data-theme]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.theme===state.theme)));
+        document.querySelectorAll('[data-visibility]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.visibility===state.visibility)));
+        state.shareUrl=state.visibility==='public'?location.origin+'/album.html?slug='+album.slug:null;
+        $('copyShare').hidden=!(state.visibility==='public'&&state.shareUrl);
+        $('saveStatus').textContent='Seu álbum salvo foi recuperado neste navegador.';
+        renderMemories();
+      }catch(error){
+        $('saveStatus').textContent='Não foi possível recuperar o álbum salvo. Não apague os dados deste navegador.';
+        console.error(error);
+      }
+    }
     async function saveAlbum(){
       const button=$('saveAlbum');
       button.disabled=true;
@@ -176,6 +203,7 @@
       catch{prompt('Copie o link do seu álbum:',state.shareUrl);}
     });
 
+    restoreAlbum();
     updatePreview();
   </script>
 </body>

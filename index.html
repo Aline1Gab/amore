@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f7eee9">
+  <meta name="description" content="Transforme sua história em um álbum digital feito de lembranças. Crie, personalize e compartilhe com o Amore.">
+  <title>Amore | Sua história merece virar um livro</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Great+Vibes&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{--wine:#632638;--deep:#351923;--rose:#b87580;--blush:#ead0ce;--cream:#f8f1e9;--paper:#fffaf5;--gold:#b99a68;--ink:#382b2b;--muted:#897777;--line:#e8d9d2}
+    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--cream);color:var(--ink);font-family:'DM Sans',sans-serif}a{color:inherit;text-decoration:none}button{font:inherit}.wrap{width:min(1160px,calc(100% - 44px));margin:auto}
+    .topline{height:5px;background:linear-gradient(90deg,var(--wine),var(--gold),var(--rose))}.nav{height:82px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #e9ddd5}.brand{font-family:'Playfair Display',serif;font-size:29px;color:var(--wine);letter-spacing:-1px}.brand span{color:var(--gold)}.navlinks{display:flex;gap:30px;font-size:12px;letter-spacing:1.4px;text-transform:uppercase;color:#6e5b5b}.navlinks a:hover{color:var(--wine)}.nav-cta{border:1px solid var(--wine);padding:12px 19px;border-radius:2px;color:var(--wine);font-size:11px;letter-spacing:1.2px;text-transform:uppercase}
+    .hero{display:grid;grid-template-columns:1.03fr .97fr;align-items:center;gap:60px;padding:76px 0 88px;min-height:610px}.eyebrow{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--rose);font-weight:700}.hero h1{font:500 clamp(45px,6vw,76px)/1.08 'Playfair Display',serif;letter-spacing:-2.5px;color:var(--deep);margin:22px 0}.hero h1 em{font-family:'Great Vibes',cursive;color:var(--rose);font-size:1.16em;font-weight:400;letter-spacing:0}.hero p{font-size:15px;line-height:1.9;color:var(--muted);max-width:440px}.actions{display:flex;align-items:center;gap:22px;margin-top:30px;flex-wrap:wrap}.btn{display:inline-flex;align-items:center;justify-content:center;background:var(--wine);color:white;padding:16px 25px;font-size:11px;letter-spacing:1.4px;text-transform:uppercase;border:1px solid var(--wine);transition:.2s}.btn:hover{background:var(--deep);transform:translateY(-2px)}.text-link{font-size:12px;color:var(--wine);border-bottom:1px solid var(--gold);padding-bottom:5px}.note{margin-top:30px;font:italic 13px 'Playfair Display',serif;color:#a58c83}
+    .art{min-height:440px;position:relative;display:grid;place-items:center}.halo{position:absolute;width:390px;height:390px;border:1px solid #dfc7bf;border-radius:50%}.halo:before,.halo:after{content:'';position:absolute;border:1px solid #eadbd1;border-radius:50%;inset:22px}.halo:after{inset:48px}.book{position:relative;width:260px;height:340px;background:linear-gradient(115deg,#3d1725,#743246 55%,#4b1e2d);box-shadow:22px 25px 45px #55303b38, inset 8px 0 12px #ffffff12;border-radius:3px 9px 9px 3px;transform:rotate(-7deg);padding:30px 22px;color:#f7e9dc;text-align:center;border-left:7px solid #351923}.book:before{content:'';position:absolute;inset:13px;border:1px solid #c4a4778c}.book-small{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:#d9bd91;margin-top:23px}.book-title{font:38px/1.1 'Great Vibes',cursive;margin:38px 0 10px}.book-sub{font:10px 'Playfair Display',serif;letter-spacing:2px;text-transform:uppercase}.book-heart{font-size:25px;color:#d9bd91;margin-top:25px}.ribbon{position:absolute;width:35px;height:390px;background:linear-gradient(90deg,#c7a36f,#e2c99b,#b58d58);right:23%;top:20px;transform:rotate(24deg);opacity:.85}.flower{position:absolute;font-size:47px;color:#b77c83;opacity:.7}.flower.one{top:26px;left:9%}.flower.two{bottom:22px;right:4%;font-size:34px}.caption{position:absolute;bottom:8px;left:5%;font:italic 13px 'Playfair Display',serif;color:#987e77}
+    .marquee{background:var(--wine);color:#f6e9df;padding:18px 0;text-align:center;font:italic 16px 'Playfair Display',serif;letter-spacing:1px}.section{padding:92px 0}.section-head{text-align:center;max-width:620px;margin:0 auto 46px}.section-head h2{font:500 clamp(34px,4vw,49px)/1.15 'Playfair Display',serif;color:var(--deep);margin:14px 0}.section-head p{color:var(--muted);font-size:14px;line-height:1.8}.features{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}.feature{padding:27px 20px;border:1px solid var(--line);background:#fffaf566;text-align:center}.feature .symbol{font:30px 'Playfair Display',serif;color:var(--rose)}.feature h3{font:18px 'Playfair Display',serif;color:var(--wine);font-weight:500;margin:14px 0 8px}.feature p{font-size:12px;line-height:1.7;color:var(--muted);margin:0}
+    .models{background:#f0e3dc}.model-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}.model{background:var(--paper);padding:12px 12px 22px;border:1px solid #e4d2c8}.model-art{height:230px;display:grid;place-items:center;position:relative;overflow:hidden}.model-art.a{background:linear-gradient(145deg,#d9b5b1,#f0deda)}.model-art.b{background:linear-gradient(145deg,#4a1d2c,#8a4656)}.model-art.c{background:linear-gradient(145deg,#d6c4a2,#f0e6d3)}.mini-book{width:135px;height:175px;display:grid;place-items:center;text-align:center;padding:20px;box-shadow:8px 12px 22px #38232b35;font:26px 'Great Vibes',cursive}.a .mini-book{background:#f8eee6;color:#713748}.b .mini-book{background:#5b2436;color:#f4dfc9;border:1px solid #c6a477}.c .mini-book{background:#f7f0df;color:#826644}.model h3{font:20px 'Playfair Display',serif;color:var(--wine);font-weight:500;margin:18px 8px 5px}.model p{font-size:12px;color:var(--muted);margin:0 8px}
+    .how{display:grid;grid-template-columns:.8fr 1.2fr;gap:75px;align-items:center}.how h2{font:500 47px/1.12 'Playfair Display',serif;color:var(--deep);margin:16px 0}.how-intro p{color:var(--muted);line-height:1.9;font-size:14px}.steps{border-top:1px solid var(--line)}.step{display:grid;grid-template-columns:45px 1fr;gap:18px;padding:22px 0;border-bottom:1px solid var(--line)}.step-num{font:italic 22px 'Playfair Display',serif;color:var(--gold)}.step h3{font:19px 'Playfair Display',serif;font-weight:500;color:var(--wine);margin:0 0 6px}.step p{font-size:12px;color:var(--muted);line-height:1.7;margin:0}
+    .closing{background:var(--deep);color:var(--cream);text-align:center;padding:82px 20px}.closing h2{font:500 clamp(36px,5vw,55px)/1.15 'Playfair Display',serif;margin:15px 0}.closing p{color:#d7c2bd;font-size:14px;line-height:1.8}.closing .btn{background:var(--gold);border-color:var(--gold);color:#321923;margin-top:18px}.footer{padding:28px 0;display:flex;justify-content:space-between;gap:15px;align-items:center;color:#927e78;font-size:11px}.footer .brand{font-size:24px}
+    @media(max-width:800px){.navlinks{display:none}.hero{grid-template-columns:1fr;gap:20px;padding:60px 0 55px;text-align:center}.hero p{margin:auto}.actions{justify-content:center}.art{min-height:410px}.features{grid-template-columns:repeat(2,1fr)}.model-grid{grid-template-columns:1fr;max-width:430px;margin:auto}.model-art{height:260px}.how{grid-template-columns:1fr;gap:35px}.section{padding:70px 0}.halo{width:330px;height:330px}.book{transform:scale(.9) rotate(-7deg)}.ribbon{right:15%}}
+    @media(max-width:430px){.wrap{width:min(100% - 32px,1160px)}.nav{height:70px}.nav-cta{padding:10px 12px;font-size:9px}.hero h1{font-size:49px}.art{min-height:360px}.halo{width:285px;height:285px}.book{transform:scale(.78) rotate(-7deg)}.ribbon{height:320px;right:12%}.features{gap:10px}.feature{padding:22px 12px}.footer{flex-direction:column;text-align:center}}
+  </style>
+</head>
+<body>
+  <div class="topline"></div>
+  <header class="wrap nav">
+    <a class="brand" href="#" aria-label="Amore início">♡ Amore<span>.</span></a>
+    <nav class="navlinks" aria-label="Navegação principal">
+      <a href="#essencia">A essência</a><a href="#colecoes">Coleções</a><a href="#como-funciona">Como funciona</a>
+    </nav>
+    <a class="nav-cta" href="#comecar">Criar meu álbum ↗</a>
+  </header>
+  <main>
+    <section class="wrap hero">
+      <div>
+        <div class="eyebrow">Um presente feito de lembranças</div>
+        <h1>Sua história merece virar <em>um livro.</em></h1>
+        <p>Existem histórias que merecem mais do que uma mensagem. No Amore, suas memórias ganham páginas, detalhes e um lugar especial para morar.</p>
+        <div class="actions"><a class="btn" href="#comecar">Começar minha história&nbsp; ♡</a><a class="text-link" href="#colecoes">Conhecer os estilos</a></div>
+        <div class="note">Feito com carinho. Guardado para sempre.</div>
+      </div>
+      <div class="art" aria-label="Ilustração de um livro romântico">
+        <div class="halo"></div><div class="ribbon"></div><div class="flower one">✿</div><div class="flower two">✾</div>
+        <div class="book"><div class="book-small">uma coleção de memórias</div><div class="book-title">Nossa história</div><div class="book-sub">em cada detalhe, um pouco de nós</div><div class="book-heart">♡</div></div>
+        <div class="caption">volume I · para guardar com carinho</div>
+      </div>
+    </section>
+    <div class="marquee">♡ &nbsp; Porque algumas histórias merecem ser sentidas página por página &nbsp; ♡</div>
+    <section class="wrap section" id="essencia">
+      <div class="section-head"><div class="eyebrow">A essência do Amore</div><h2>Pequenos detalhes.<br>Sentimentos imensos.</h2><p>Um espaço para transformar datas, fotografias, palavras e lembranças em um presente digital com a sua identidade.</p></div>
+      <div class="features">
+        <article class="feature"><div class="symbol">✧</div><h3>Do seu jeito</h3><p>Escolha cores, estilos e detalhes que contem a história de vocês.</p></article>
+        <article class="feature"><div class="symbol">♡</div><h3>Suas memórias</h3><p>Reúna fotos, cartas, frases e momentos especiais em um só lugar.</p></article>
+        <article class="feature"><div class="symbol">❀</div><h3>Feito para presentear</h3><p>Crie um link especial e compartilhe sua surpresa com quem ama.</p></article>
+        <article class="feature"><div class="symbol">⌁</div><h3>Uma surpresa viva</h3><p>Com o Amore Moments, acompanhe as aberturas do seu álbum.</p></article>
+      </div>
+    </section>
+    <section class="models section" id="colecoes">
+      <div class="wrap">
+        <div class="section-head"><div class="eyebrow">Encontre sua atmosfera</div><h2>Uma capa para cada história.</h2><p>Do romance clássico ao diário de lembranças, cada álbum começa com um estilo. E termina com a sua personalidade.</p></div>
+        <div class="model-grid">
+          <article class="model"><div class="model-art a"><div class="mini-book">um amor<br>em flores ♡</div></div><h3>Jardim de memórias</h3><p>Delicado, floral e cheio de ternura.</p></article>
+          <article class="model"><div class="model-art b"><div class="mini-book">para sempre<br>nós</div></div><h3>Romance atemporal</h3><p>Vinho, dourado e elegância clássica.</p></article>
+          <article class="model"><div class="model-art c"><div class="mini-book">capítulos<br>de nós</div></div><h3>Diário de lembranças</h3><p>Uma estética intimista, leve e afetiva.</p></article>
+        </div>
+      </div>
+    </section>
+    <section class="wrap section how" id="como-funciona">
+      <div class="how-intro"><div class="eyebrow">Do sentimento ao presente</div><h2>Três passos.<br>Uma lembrança só de vocês.</h2><p>Você cuida da história. O Amore ajuda a transformar tudo em um álbum digital pronto para compartilhar.</p><a class="text-link" href="#comecar">Quero criar meu álbum&nbsp; ↗</a></div>
+      <div class="steps">
+        <article class="step"><div class="step-num">01</div><div><h3>Escolha seu estilo</h3><p>Comece por uma atmosfera e personalize a capa do seu álbum.</p></div></article>
+        <article class="step"><div class="step-num">02</div><div><h3>Conte sua história</h3><p>Adicione fotos, textos, datas e todos aqueles detalhes que importam.</p></div></article>
+        <article class="step"><div class="step-num">03</div><div><h3>Compartilhe o encanto</h3><p>Publique seu álbum e envie o link para alguém especial.</p></div></article>
+      </div>
+    </section>
+    <section class="closing" id="comecar">
+      <div class="eyebrow">Sua história começa aqui</div>
+      <h2>Vamos transformar lembranças<br>em algo inesquecível?</h2>
+      <p>O Estúdio Amore está sendo preparado com carinho.<br>Em breve, você poderá criar seu próprio álbum por aqui.</p>
+      <a class="btn" href="https://github.com/Aline1Gab/amore">Acompanhar o projeto&nbsp; ↗</a>
+    </section>
+  </main>
+  <footer class="wrap footer"><a class="brand" href="#">♡ Amore<span>.</span></a><span>Feito para histórias que merecem ser lembradas.</span><span>© 2026 Amore</span></footer>
+</body>
+</html>

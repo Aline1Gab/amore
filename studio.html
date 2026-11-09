@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f8f1e9">
+  <meta name="description" content="Estúdio Amore: comece a montar seu álbum de memórias.">
+  <title>Estúdio Amore | Crie seu álbum</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Great+Vibes&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{--wine:#632638;--deep:#351923;--rose:#b87580;--blush:#ead0ce;--cream:#f8f1e9;--paper:#fffaf5;--gold:#b99a68;--ink:#382b2b;--muted:#897777;--line:#e8d9d2}
+    *{box-sizing:border-box}body{margin:0;background:var(--cream);color:var(--ink);font-family:'DM Sans',sans-serif}.topline{height:5px;background:linear-gradient(90deg,var(--wine),var(--gold),var(--rose))}
+    header{height:76px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 max(24px,calc((100% - 1180px)/2));gap:18px}.brand{font:28px 'Playfair Display',serif;color:var(--wine);text-decoration:none}.brand span{color:var(--gold)}.back{font-size:12px;color:var(--wine);text-decoration:none;border-bottom:1px solid var(--gold);padding-bottom:4px}
+    .intro{max-width:1180px;margin:0 auto;padding:38px 24px 22px}.eyebrow{text-transform:uppercase;letter-spacing:2.5px;color:var(--rose);font-size:10px;font-weight:700}.intro h1{font:clamp(34px,5vw,52px)/1.1 'Playfair Display',serif;color:var(--deep);margin:12px 0 8px}.intro p{color:var(--muted);font-size:14px;line-height:1.7;margin:0;max-width:620px}
+    .workspace{max-width:1180px;margin:0 auto;padding:12px 24px 70px;display:grid;grid-template-columns:minmax(0,1fr) minmax(300px,.82fr);gap:24px;align-items:start}.panel{background:var(--paper);border:1px solid var(--line);padding:25px;box-shadow:0 12px 35px #4b26300a}.panel h2{font:24px 'Playfair Display',serif;color:var(--wine);font-weight:500;margin:0 0 7px}.hint{font-size:12px;color:var(--muted);line-height:1.6;margin:0 0 22px}.field{margin:0 0 17px}.field label{display:block;font-size:11px;font-weight:700;letter-spacing:.5px;color:#6c5555;margin-bottom:7px}.field input,.field textarea{width:100%;border:1px solid #e2d2cb;background:#fffdf9;padding:12px 13px;font:13px 'DM Sans',sans-serif;color:var(--ink);border-radius:2px;outline:none}.field input:focus,.field textarea:focus{border-color:var(--rose);box-shadow:0 0 0 3px #b8758018}.field textarea{resize:vertical;min-height:82px}.field small{display:block;color:#9a8982;font-size:10px;margin-top:6px}
+    .themes{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:12px 0 22px}.theme{border:1px solid var(--line);background:#fffaf5;padding:8px;cursor:pointer;text-align:left;color:var(--ink);font:12px 'DM Sans',sans-serif}.theme[aria-pressed=true]{border:2px solid var(--wine);padding:7px;background:#fbf1ed}.swatch{height:58px;margin-bottom:8px;display:grid;place-items:center;font:23px 'Great Vibes',cursive}.swatch.garden{background:linear-gradient(140deg,#e7c8c4,#f7e9df);color:#713748}.swatch.classic{background:linear-gradient(140deg,#4a1d2c,#8a4656);color:#f3dfc9}.swatch.diary{background:linear-gradient(140deg,#d6c4a2,#f2e8d7);color:#826644}.theme strong{display:block;font-size:11px}.theme span:last-child{font-size:10px;color:var(--muted)}
+    .upload{border:1px dashed #cdb6ad;background:#fffdf9;padding:17px;text-align:center}.upload input{max-width:100%;font-size:11px}.upload p{font-size:11px;color:var(--muted);margin:8px 0 0}.memories{display:grid;gap:10px}.memory{border:1px solid var(--line);padding:12px;background:#fffdf9;display:grid;grid-template-columns:68px 1fr;gap:12px;align-items:center}.memory img{width:68px;height:68px;object-fit:cover;background:#eee0d8}.memory h3{font:16px 'Playfair Display',serif;color:var(--wine);margin:0 0 4px}.memory p{font-size:11px;color:var(--muted);margin:0;line-height:1.5}.memory button{border:0;background:none;color:#986b70;font-size:10px;text-decoration:underline;cursor:pointer;padding:7px 0 0}.empty{font-size:12px;color:#9a8982;text-align:center;padding:16px;border:1px dashed var(--line)}
+    .actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px}.btn{border:1px solid var(--wine);background:var(--wine);color:white;padding:13px 17px;font:11px 'DM Sans',sans-serif;letter-spacing:.8px;text-transform:uppercase;cursor:pointer}.btn.secondary{background:transparent;color:var(--wine)}.btn:hover{filter:brightness(1.08)}.notice{font-size:10px;line-height:1.6;color:#927e78;margin:14px 0 0}
+    .preview-wrap{position:sticky;top:18px}.preview-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}.preview-top h2{font:22px 'Playfair Display',serif;color:var(--wine);margin:0}.live{font-size:9px;letter-spacing:1px;text-transform:uppercase;color:#6d8a6c}.book-preview{background:#f0e3dc;padding:25px;min-height:560px;display:flex;align-items:center;justify-content:center}.book-page{width:min(100%,360px);min-height:500px;padding:25px;background:#fffaf4;box-shadow:0 15px 35px #4b263025;text-align:center;position:relative;border:1px solid #e3d1c3;display:flex;flex-direction:column;align-items:center;justify-content:center}.book-page:before{content:'';position:absolute;inset:10px;border:1px solid #c9ae8a;pointer-events:none}.cover-kicker{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:#9b7c6d;margin-top:20px}.cover-title{font:48px/1.1 'Great Vibes',cursive;color:var(--wine);margin:25px 0 12px;overflow-wrap:anywhere;max-width:100%}.cover-subtitle{font:11px 'Playfair Display',serif;color:#8b7168;letter-spacing:1px;max-width:85%;line-height:1.6}.cover-heart{font-size:24px;color:var(--gold);margin:28px 0}.preview-date{font-size:10px;color:#a28b7d}.preview-dedication{font:italic 15px/1.6 'Playfair Display',serif;color:#765b59;max-width:90%;margin-top:18px;overflow-wrap:anywhere}.preview-memories{width:100%;margin-top:22px;display:grid;gap:9px}.preview-memory{display:flex;gap:9px;text-align:left;align-items:center;background:#f7eee7;padding:7px}.preview-memory img{width:48px;height:48px;object-fit:cover}.preview-memory strong{display:block;font:13px 'Playfair Display',serif;color:var(--wine)}.preview-memory span{font-size:10px;color:var(--muted)}
+    .toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:var(--deep);color:white;padding:12px 18px;font-size:12px;box-shadow:0 8px 25px #0002;display:none;z-index:5}.toast.show{display:block}footer{text-align:center;padding:22px;color:#927e78;font-size:10px}
+    @media(max-width:850px){.workspace{grid-template-columns:1fr}.preview-wrap{position:static}.book-preview{min-height:520px}}@media(max-width:520px){header{height:66px;padding:0 17px}.brand{font-size:24px}.intro{padding:30px 17px 18px}.workspace{padding:8px 17px 45px}.panel{padding:18px}.themes{gap:6px}.theme{padding:6px}.swatch{height:48px}.book-preview{padding:14px}.book-page{min-height:460px}}
+  </style>
+</head>
+<body>
+  <div class="topline"></div>
+  <header><a class="brand" href="index.html">♡ Amore<span>.</span></a><a class="back" href="index.html">← Voltar à página inicial</a></header>
+  <section class="intro"><div class="eyebrow">Estúdio Amore · primeira experiência</div><h1>Vamos contar a sua história?</h1><p>Escolha uma atmosfera, dê um nome ao seu álbum e comece a reunir as lembranças. A prévia muda enquanto você cria.</p></section>
+  <main class="workspace">
+    <section class="panel">
+      <h2>Comece pelo começo</h2><p class="hint">Essas informações formam a capa do seu álbum. Você pode mudar tudo depois.</p>
+      <div class="field"><label for="title">NOME DO ÁLBUM</label><input id="title" maxlength="55" value="Nossa história" placeholder="Ex.: Nossa história"></div>
+      <div class="field"><label for="subtitle">FRASE DA CAPA</label><input id="subtitle" maxlength="90" value="em cada detalhe, um pouco de nós" placeholder="Uma frase especial"></div>
+      <div class="field"><label for="date">UMA DATA ESPECIAL (OPCIONAL)</label><input id="date" type="date"></div>
+      <div class="field"><label>ESCOLHA O ESTILO</label>
+        <div class="themes">
+          <button class="theme" type="button" data-theme="garden" aria-pressed="false"><span class="swatch garden">flores ♡</span><strong>Jardim de memórias</strong><span>Delicado e floral</span></button>
+          <button class="theme" type="button" data-theme="classic" aria-pressed="true"><span class="swatch classic">para sempre</span><strong>Romance atemporal</strong><span>Vinho e dourado</span></button>
+          <button class="theme" type="button" data-theme="diary" aria-pressed="false"><span class="swatch diary">capítulos</span><strong>Diário de lembranças</strong><span>Leve e intimista</span></button>
+        </div>
+      </div>
+      <div class="field"><label for="dedication">DEDICATÓRIA</label><textarea id="dedication" maxlength="240" placeholder="Escreva algumas palavras para quem vai receber..."></textarea><small>Até 240 caracteres.</small></div>
+      <div class="field"><label for="photos">ADICIONE FOTOS</label><div class="upload"><input id="photos" type="file" accept="image/*" multiple><p>Escolha imagens do seu computador. Elas aparecem nesta prévia, mas ainda não são salvas online.</p></div></div>
+      <div class="field"><label for="memoryTitle">UMA LEMBRANÇA</label><input id="memoryTitle" maxlength="45" placeholder="Ex.: Nosso primeiro encontro"></div>
+      <div class="field"><label for="memoryText">CONTE UM POUQUINHO</label><textarea id="memoryText" maxlength="180" placeholder="O que torna esse momento especial?"></textarea></div>
+      <div class="actions"><button class="btn" id="addMemory" type="button">Adicionar lembrança +</button><button class="btn secondary" id="clear" type="button">Limpar prévia</button></div>
+      <div style="margin-top:22px"><label style="display:block;font-size:11px;font-weight:700;letter-spacing:.5px;color:#6c5555;margin-bottom:9px">LEMBRANÇAS ADICIONADAS</label><div class="memories" id="memories"><div class="empty">Suas lembranças vão aparecer aqui.</div></div></div>
+      <p class="notice">Esta é uma versão de demonstração: os dados ficam somente nesta página enquanto ela estiver aberta. Ainda não existe conta, salvamento permanente, publicação ou link compartilhável.</p>
+    </section>
+    <aside class="preview-wrap"><div class="preview-top"><h2>Prévia do seu álbum</h2><span class="live">● ao vivo</span></div>
+      <div class="book-preview"><div class="book-page" id="bookPage"><div class="cover-kicker">uma coleção de memórias</div><div class="cover-title" id="previewTitle">Nossa história</div><div class="cover-subtitle" id="previewSubtitle">em cada detalhe, um pouco de nós</div><div class="cover-heart">♡</div><div class="preview-date" id="previewDate"></div><div class="preview-dedication" id="previewDedication"></div><div class="preview-memories" id="previewMemories"></div></div></div>
+    </aside>
+  </main>
+  <footer>♡ Amore · Feito para histórias que merecem ser lembradas.</footer>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script>
+    const $ = id => document.getElementById(id);
+    const state = {theme:'classic', memories:[], photos:[]};
+    const themeColors = {
+      garden:{bg:'#fff8f2',border:'#d5b4ad',wine:'#75404b',gold:'#b87580'},
+      classic:{bg:'#fffaf4',border:'#c9ae8a',wine:'#632638',gold:'#b99a68'},
+      diary:{bg:'#fbf5e8',border:'#c9b88f',wine:'#806743',gold:'#ad9568'}
+    };
+    function updatePreview(){
+      $('previewTitle').textContent = $('title').value.trim() || 'Nossa história';
+      $('previewSubtitle').textContent = $('subtitle').value.trim() || 'em cada detalhe, um pouco de nós';
+      $('previewDate').textContent = $('date').value ? new Date($('date').value+'T12:00:00').toLocaleDateString('pt-BR') : '';
+      $('previewDedication').textContent = $('dedication').value;
+      const colors = themeColors[state.theme];
+      $('bookPage').style.background = colors.bg;
+      $('bookPage').style.setProperty('--wine',colors.wine);
+      $('bookPage').style.setProperty('--gold',colors.gold);
+      $('bookPage').style.borderColor = colors.border;
+      $('previewTitle').style.color = colors.wine;
+      $('previewDedication').style.color = colors.wine;
+      $('previewMemories').innerHTML = '';
+      state.memories.forEach(item => {
+        const card = document.createElement('div'); card.className='preview-memory';
+        if(item.photo){const img=document.createElement('img');img.src=item.photo;img.alt='Foto da lembrança';card.appendChild(img);}
+        const text=document.createElement('div');const strong=document.createElement('strong');strong.textContent=item.title;const span=document.createElement('span');span.textContent=item.text;text.append(strong,span);card.appendChild(text);$('previewMemories').appendChild(card);
+      });
+      state.photos.forEach(src=>{const img=document.createElement('img');img.src=src;img.alt='Foto adicionada';img.style.cssText='width:100%;max-height:145px;object-fit:cover;border:4px solid #fff;margin-top:8px';$('previewMemories').appendChild(img);});
+    }
+    function renderMemories(){
+      const root=$('memories');root.innerHTML='';
+      if(!state.memories.length){root.innerHTML='<div class="empty">Suas lembranças vão aparecer aqui.</div>';updatePreview();return;}
+      state.memories.forEach((item,index)=>{
+        const card=document.createElement('div');card.className='memory';
+        if(item.photo){const img=document.createElement('img');img.src=item.photo;img.alt='Foto da lembrança';card.appendChild(img);}else{const placeholder=document.createElement('div');placeholder.className='swatch diary';placeholder.textContent='♡';card.appendChild(placeholder);}
+        const body=document.createElement('div');const title=document.createElement('h3');title.textContent=item.title;const desc=document.createElement('p');desc.textContent=item.text;const remove=document.createElement('button');remove.type='button';remove.textContent='Remover';remove.addEventListener('click',()=>{state.memories.splice(index,1);renderMemories();});body.append(title,desc,remove);card.appendChild(body);root.appendChild(card);
+      });updatePreview();
+    }
+    function toast(message){const el=$('toast');el.textContent=message;el.classList.add('show');setTimeout(()=>el.classList.remove('show'),2600);}
+    ['title','subtitle','date','dedication'].forEach(id=>$(id).addEventListener('input',updatePreview));
+    document.querySelectorAll('[data-theme]').forEach(button=>button.addEventListener('click',()=>{state.theme=button.dataset.theme;document.querySelectorAll('[data-theme]').forEach(b=>b.setAttribute('aria-pressed',String(b===button)));updatePreview();}));
+    $('photos').addEventListener('change',event=>{
+      const files=Array.from(event.target.files||[]).filter(file=>file.type.startsWith('image/')).slice(0,8-state.photos.length);
+      if(!files.length)return;
+      files.forEach(file=>{const reader=new FileReader();reader.onload=()=>{state.photos.push(reader.result);updatePreview();};reader.readAsDataURL(file);});
+      event.target.value='';
+      if(state.photos.length>=8)toast('Você chegou ao limite de 8 fotos nesta prévia.');
+    });
+    $('addMemory').addEventListener('click',()=>{
+      const title=$('memoryTitle').value.trim(),text=$('memoryText').value.trim();
+      if(!title){toast('Dê um título para essa lembrança primeiro.');$('memoryTitle').focus();return;}
+      state.memories.push({title,text,photo:''});$('memoryTitle').value='';$('memoryText').value='';renderMemories();toast('Lembrança adicionada à prévia ♡');
+    });
+    $('clear').addEventListener('click',()=>{
+      if(!confirm('Quer limpar as informações e recomeçar a prévia?'))return;
+      $('title').value='Nossa história';$('subtitle').value='em cada detalhe, um pouco de nós';$('date').value='';$('dedication').value='';$('memoryTitle').value='';$('memoryText').value='';$('photos').value='';state.memories=[];state.photos=[];state.theme='classic';document.querySelectorAll('[data-theme]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.theme==='classic')));renderMemories();toast('Prévia limpa. Vamos começar de novo!');
+    });
+    updatePreview();
+  </script>
+</body>
+</html>

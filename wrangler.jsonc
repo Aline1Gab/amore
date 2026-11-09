@@ -1,0 +1,21 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "amore",
+  "main": "src/index.js",
+  "compatibility_date": "2026-11-09",
+  "assets": {
+    "directory": ".",
+    "binding": "ASSETS",
+    "run_worker_first": ["/api/*"]
+  },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "amore-db",
+      "database_id": "885174c0-631e-4b67-aa6d-92b94fd35600"
+    }
+  ],
+  "observability": {
+    "enabled": true
+  }
+}
